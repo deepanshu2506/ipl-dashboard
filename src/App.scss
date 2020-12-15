@@ -1,0 +1,13 @@
+$primary-color: #2196f3;
+$success: #62ab00;
+
+$theme-colors: (
+  "primary": $primary-color,
+);
+
+* {
+  font-family: roboto;
+}
+
+/* import bootstrap to set changes */
+@import "~bootstrap/scss/bootstrap";
