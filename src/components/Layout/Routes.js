@@ -1,6 +1,7 @@
 import { Image } from "react-bootstrap";
 import Avatar from "react-avatar";
 import PlayerScreen from "../Screens/PlayersScreen/Screen";
+import MatchScreen from "../Screens/MatchScreen/Screen";
 
 const routes = [
   {
@@ -40,7 +41,7 @@ const routes = [
       size: 28,
     },
     component: () => {
-      return <h1>home</h1>;
+      return MatchScreen;
     },
   },
 ];

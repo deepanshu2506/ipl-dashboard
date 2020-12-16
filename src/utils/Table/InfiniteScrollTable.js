@@ -16,11 +16,11 @@ const InfiniteScrollTable = ({
 }) => {
   React.useEffect(() => {
     const tableContainer = document.querySelector(".table-container");
-    const lastRow = document.querySelector(".table tbody tr:last-child");
     const scrollListener = tableContainer.addEventListener(
       "scroll",
       _.throttle((e) => {
         if (props.hasMore) {
+          const lastRow = document.querySelector(".table tbody tr:last-child");
           const scrollHeight =
             tableContainer.scrollTop + tableContainer.clientHeight + 1;
           const lastRowOffset = lastRow.offsetTop + lastRow.clientHeight;

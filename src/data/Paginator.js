@@ -2,7 +2,7 @@ class Paginator {
   constructor(data = [], size = 20) {
     this.start = 0;
     this.size = size;
-    this._data = data.slice(0, 25);
+    this._data = data;
   }
 
   getNextPage() {
