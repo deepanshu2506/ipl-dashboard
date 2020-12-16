@@ -6,28 +6,26 @@ import { PlayerFilterBox } from "../../Content/Filters/FilterBox/FilterBox";
 import "./styles.scss";
 const PlayerScreen = (props) => {
   const playerHeaders = PlayerRepository.getKeys();
-  const PlayersPaginator = PlayerRepository.getAll();
-  const [players, setPlayers] = useState(PlayersPaginator.getNextPage());
+  const [PlayersPaginator, setPlayersPaginator] = useState(
+    PlayerRepository.getAll()
+  );
+
   return (
     <Container className="playerScreen pt-3 pl-4 " fluid>
       <Row>
-        <PlayerFilterBox />
+        <PlayerFilterBox setFilteredData={setPlayersPaginator} />
       </Row>
       <InfiniteScrollTable
-        data={players}
+        dataPaginator={PlayersPaginator}
         keyExtractor={(player, idx) => idx}
         headerCols={playerHeaders}
         renderRow={(player) =>
           playerHeaders.map(
-            (header) => player[header] || <span class="not-available">-</span>
+            (header) =>
+              player[header] || <span className="not-available">-</span>
           )
         }
-        nextPage={() => {
-          const newPlayers = PlayersPaginator.getNextPage();
-          setPlayers((players) => [...players, ...newPlayers]);
-        }}
-        hasMore={PlayersPaginator.hasMore()}
-        selectable={false}
+        renderEmpty={(props) => <p>No Players</p>}
       />
     </Container>
   );

@@ -1,12 +1,14 @@
 import { Col, Row } from "react-bootstrap";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./styles.scss";
 import { BsFillCaretDownFill, BsFilter } from "react-icons/bs";
+import PropTypes from "prop-types";
 import { IoCloseOutline } from "react-icons/io5";
 import MatchRepository from "../../../../data/MatchRepository";
 import MatchFilterDialog from "../FilterDialogs/MatchesFilterDialog";
 import PlayerFilterDialog from "../FilterDialogs/PlayerFilterDialog";
 import PlayerRepository from "../../../../data/PlayerRepository";
+import Repository from "../../../../data/Repository";
 
 const FilterLabel = ({ label, removeFilter }) => {
   return (
@@ -30,14 +32,26 @@ const FilterButton = ({ onClick }) => (
   </Col>
 );
 
-const FilterBox = ({ FilterDialog, dataRepository }) => {
+function usePrevious(value) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}
+
+const FilterBox = ({ FilterDialog, dataRepository, setFilteredData }) => {
   const [showFilterDialog, setShowFiltersDialog] = useState(false);
   const [filters, setFilters] = useState({});
   const [formattedFilters, setFormattedFilters] = useState([]);
+  const prevFilters = usePrevious(filters);
   useEffect(() => {
-    const formattedFilters = dataRepository.formatFilterLabels(filters);
-    setFormattedFilters(formattedFilters);
-  }, [filters, dataRepository]);
+    if (prevFilters !== undefined) {
+      setFilteredData(dataRepository.filter(filters));
+      const formattedFilters = dataRepository.formatFilterLabels(filters);
+      setFormattedFilters(formattedFilters);
+    }
+  }, [filters]);
   function openFiltersDialog() {
     setShowFiltersDialog(true);
   }
@@ -52,7 +66,6 @@ const FilterBox = ({ FilterDialog, dataRepository }) => {
       setFilters(newFilters);
     };
   }
-  console.log(FilterDialog);
   return (
     <React.Fragment>
       <FilterDialog
@@ -83,10 +96,17 @@ const FilterBox = ({ FilterDialog, dataRepository }) => {
   );
 };
 
+FilterBox.propTypes = {
+  FilterDialog: PropTypes.element.isRequired,
+  dataRepository: PropTypes.instanceOf(Repository).isRequired,
+  setFilteredData: PropTypes.func.isRequired,
+};
+
 export const MatchFilterBox = (props) => (
   <FilterBox
     FilterDialog={MatchFilterDialog}
     dataRepository={MatchRepository}
+    setFilteredData={props.setFilteredData}
   />
 );
 
@@ -94,5 +114,6 @@ export const PlayerFilterBox = (props) => (
   <FilterBox
     FilterDialog={PlayerFilterDialog}
     dataRepository={PlayerRepository}
+    {...props}
   />
 );

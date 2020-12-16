@@ -3,6 +3,7 @@ class Repository {
   getKeys() {}
   formatFilterLabels() {}
   getFilterPoints() {}
+  filter() {}
 }
 
 export default Repository;

@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Col, Form, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { Table as TableBase } from "react-bootstrap";
 import PropTypes from "prop-types";
 import _ from "lodash";
 import "./styles.scss";
+import Paginator from "../../data/Paginator";
+
 const InfiniteScrollTable = ({
-  data,
+  dataPaginator,
   headerCols,
   renderRow,
   renderEmpty,
@@ -14,43 +16,37 @@ const InfiniteScrollTable = ({
   selectable = true,
   ...props
 }) => {
+  const [data, setData] = useState([]);
+  const loadMore = () => {
+    setData((prev) => [...prev, ...dataPaginator.getNextPage()]);
+  };
+
+  React.useEffect(() => {
+    setData(dataPaginator.getFirstPage());
+  }, [dataPaginator]);
+
   React.useEffect(() => {
     const tableContainer = document.querySelector(".table-container");
+    const onTableScroll = _.throttle((e) => {
+      if (dataPaginator.hasMore()) {
+        const lastRow = document.querySelector(".table tbody tr:last-child");
+        const scrollHeight =
+          tableContainer.scrollTop + tableContainer.clientHeight + 1;
+        const lastRowOffset = lastRow.offsetTop + lastRow.clientHeight;
+        if (scrollHeight >= lastRowOffset) {
+          loadMore();
+        }
+      }
+    }, 100);
     const scrollListener = tableContainer.addEventListener(
       "scroll",
-      _.throttle((e) => {
-        if (props.hasMore) {
-          const lastRow = document.querySelector(".table tbody tr:last-child");
-          const scrollHeight =
-            tableContainer.scrollTop + tableContainer.clientHeight + 1;
-          const lastRowOffset = lastRow.offsetTop + lastRow.clientHeight;
-          if (scrollHeight >= lastRowOffset) {
-            props.nextPage();
-          }
-        } else {
-        }
-      }, 100)
+      onTableScroll
     );
     return () => {
       tableContainer.removeEventListener("scroll", scrollListener);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const [selectedCount, setSelectedCount] = useState(0);
-
-  function selectAllItems(selected) {
-    const newItems = data.map((item) => ({ ...item, selected: selected }));
-    dataModifier(newItems);
-    setSelectedCount(selected ? data.length : 0);
-  }
-
-  function selectItem(id, selected) {
-    const newItems = data.map((lead) =>
-      lead.id === id ? { ...lead, selected } : lead
-    );
-
-    setSelectedCount(selected ? selectedCount + 1 : selectedCount - 1);
-    dataModifier(newItems);
-  }
 
   return (
     <Row className="table-container flex-grow-1 ">
@@ -58,18 +54,6 @@ const InfiniteScrollTable = ({
         <TableBase hover className="table">
           <thead className="bg-primary">
             <tr>
-              {selectable && (
-                <th>
-                  <Form.Check
-                    type="checkbox"
-                    disabled={data.length === 0}
-                    checked={data.length !== 0 && selectedCount === data.length}
-                    onChange={(event) => {
-                      selectAllItems(event.target.checked);
-                    }}
-                  />
-                </th>
-              )}
               {headerCols.map((item, idx) => (
                 <th key={idx}>{item}</th>
               ))}
@@ -80,25 +64,10 @@ const InfiniteScrollTable = ({
               {data.map((item, idx) => (
                 <tr
                   key={keyExtractor(item, idx)}
-                  className={item.selected ? "bg-lightgray" : ""}
                   onClick={() => {
                     props.onRowClick && props.onRowClick(item);
                   }}
                 >
-                  {selectable && (
-                    <td>
-                      <Form.Check
-                        type="checkbox"
-                        checked={item.selected || false}
-                        onChange={(event) => {
-                          selectItem(
-                            keyExtractor(item, idx),
-                            event.target.checked
-                          );
-                        }}
-                      />
-                    </td>
-                  )}
                   {renderRow(item).map((cell, idx) => (
                     <td key={idx}>{cell}</td>
                   ))}
@@ -108,7 +77,7 @@ const InfiniteScrollTable = ({
           ) : (
             <tbody>
               <tr>
-                <td colspan="100%">{renderEmpty()}</td>
+                <td colSpan="100%">{renderEmpty()}</td>
               </tr>
             </tbody>
           )}
@@ -119,7 +88,7 @@ const InfiniteScrollTable = ({
 };
 
 InfiniteScrollTable.propTypes = {
-  data: PropTypes.array.isRequired,
+  dataPaginator: PropTypes.instanceOf(Paginator).isRequired,
   headerCols: PropTypes.array.isRequired,
   renderRow: PropTypes.func.isRequired,
   renderEmpty: PropTypes.func.isRequired,

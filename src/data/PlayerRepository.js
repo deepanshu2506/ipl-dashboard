@@ -15,6 +15,11 @@ class PlayersRepository extends Repository {
     return new Paginator(this.players, 20);
   }
 
+  filter(filters) {
+    const filteredPlayers = this.players.filter(() => Math.random() > 0.5);
+    return new Paginator(filteredPlayers);
+  }
+
   formatFilterLabels(filters) {
     return Object.keys(filters)
       .map((key) => {

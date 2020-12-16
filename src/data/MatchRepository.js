@@ -44,7 +44,6 @@ class MatchRepository extends Repository {
       .filter((item) => item != null);
   }
   getFilterPoints(points) {
-    console.log(matches.length);
     let filterPoints = {};
     points.forEach((point) => {
       filterPoints[point] = new Set();

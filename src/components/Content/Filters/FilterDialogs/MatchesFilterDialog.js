@@ -24,7 +24,6 @@ const MatchFilterPoints = MatchRepository.getFilterPoints([
   "Venue",
   "tossDecision",
 ]);
-console.log(MatchFilterPoints);
 
 const animatedComponents = makeAnimated();
 const MultiSelect = ({ selected, options, ...props }) => (
