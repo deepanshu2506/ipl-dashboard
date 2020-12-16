@@ -35,7 +35,6 @@ const routes = [
   {
     title: "matches",
     path: "/matches",
-    exact: true,
     icon: {
       component: () => <Avatar src="bats-man.svg" round={true} size={35} />,
       size: 28,

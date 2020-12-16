@@ -12,7 +12,13 @@ const MatchScreen = (props) => {
   return (
     <Container className="matchscreen  pt-3 pl-4 " fluid>
       <Row>
-        <MatchFilterBox setFilteredData={setMatchesPaginator} />
+        <MatchFilterBox
+          setFilteredData={setMatchesPaginator}
+          filterQuery={props.location.search}
+        />
+      </Row>
+      <Row>
+        <span className="row-count">{`${MatchesPaginator.length} entries`}</span>
       </Row>
       <InfiniteScrollTable
         dataPaginator={MatchesPaginator}

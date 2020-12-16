@@ -9,11 +9,21 @@ class MatchRepository extends Repository {
   }
 
   getKeys() {
-    return Object.keys(this.matches[0]).filter((key) => key != "id");
+    return Object.keys(this.matches[0]).filter((key) => key !== "id");
   }
 
   getAll() {
     return new Paginator(this.matches, 20);
+  }
+
+  filter(filters) {
+    const filterFunction = filters.playingTeam
+      ? (match) =>
+          filters.playingTeam.includes(match.team1) ||
+          filters.playingTeam.includes(match.team2)
+      : () => Math.random() > 0.5;
+    const filteredPlayers = this.matches.filter(filterFunction);
+    return new Paginator(filteredPlayers);
   }
 
   formatFilterLabels(filters) {
@@ -32,7 +42,9 @@ class MatchRepository extends Repository {
                   label: (
                     <span>
                       <b>{key} : </b>
-                      {filters[key].join(", ")}
+                      {typeof filters[key] === "string"
+                        ? filters[key]
+                        : filters[key].join(", ")}
                     </span>
                   ),
                 }

@@ -9,6 +9,7 @@ import MatchFilterDialog from "../FilterDialogs/MatchesFilterDialog";
 import PlayerFilterDialog from "../FilterDialogs/PlayerFilterDialog";
 import PlayerRepository from "../../../../data/PlayerRepository";
 import Repository from "../../../../data/Repository";
+import querystring from "querystring";
 
 const FilterLabel = ({ label, removeFilter }) => {
   return (
@@ -40,13 +41,22 @@ function usePrevious(value) {
   return ref.current;
 }
 
-const FilterBox = ({ FilterDialog, dataRepository, setFilteredData }) => {
+const FilterBox = ({
+  FilterDialog,
+  dataRepository,
+  setFilteredData,
+  ...props
+}) => {
   const [showFilterDialog, setShowFiltersDialog] = useState(false);
-  const [filters, setFilters] = useState({});
+  const [filters, setFilters] = useState(
+    props.filterQuery ? querystring.parse(props.filterQuery.substring(1)) : {}
+  );
   const [formattedFilters, setFormattedFilters] = useState([]);
   const prevFilters = usePrevious(filters);
+
   useEffect(() => {
-    if (prevFilters !== undefined) {
+    if (prevFilters !== undefined || Object.keys(filters).length !== 0) {
+      console.log("here");
       setFilteredData(dataRepository.filter(filters));
       const formattedFilters = dataRepository.formatFilterLabels(filters);
       setFormattedFilters(formattedFilters);
@@ -60,6 +70,7 @@ const FilterBox = ({ FilterDialog, dataRepository, setFilteredData }) => {
   }
   function removeFilter(key) {
     return function () {
+      console.log(key);
       const newFilters = Object.keys(filters)
         .filter((k) => k !== key)
         .reduce((prev, key) => ({ ...prev, [key]: filters[key] }), {});
@@ -100,6 +111,7 @@ FilterBox.propTypes = {
   FilterDialog: PropTypes.element.isRequired,
   dataRepository: PropTypes.instanceOf(Repository).isRequired,
   setFilteredData: PropTypes.func.isRequired,
+  filterQuery: PropTypes.string,
 };
 
 export const MatchFilterBox = (props) => (
@@ -107,6 +119,7 @@ export const MatchFilterBox = (props) => (
     FilterDialog={MatchFilterDialog}
     dataRepository={MatchRepository}
     setFilteredData={props.setFilteredData}
+    {...props}
   />
 );
 

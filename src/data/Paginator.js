@@ -10,6 +10,9 @@ class Paginator {
     this.start = this.start + this.size;
     return nextPage;
   }
+  get length() {
+    return this._data.length;
+  }
 
   getFirstPage() {
     this.start = 0;

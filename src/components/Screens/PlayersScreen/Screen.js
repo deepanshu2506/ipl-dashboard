@@ -15,6 +15,9 @@ const PlayerScreen = (props) => {
       <Row>
         <PlayerFilterBox setFilteredData={setPlayersPaginator} />
       </Row>
+      <Row>
+        <span className="row-count">{`${PlayersPaginator.length} entries`}</span>
+      </Row>
       <InfiniteScrollTable
         dataPaginator={PlayersPaginator}
         keyExtractor={(player, idx) => idx}
