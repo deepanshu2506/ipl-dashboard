@@ -3,8 +3,11 @@ import React, { useEffect, useState } from "react";
 import "./styles.scss";
 import { BsFillCaretDownFill, BsFilter } from "react-icons/bs";
 import { IoCloseOutline } from "react-icons/io5";
+import MatchRepository from "../../../../data/MatchRepository";
+import MatchFilterDialog from "../FilterDialogs/MatchesFilterDialog";
 import PlayerFilterDialog from "../FilterDialogs/PlayerFilterDialog";
 import PlayerRepository from "../../../../data/PlayerRepository";
+
 const FilterLabel = ({ label, removeFilter }) => {
   return (
     <Col md="auto" className="filter-label">
@@ -27,14 +30,14 @@ const FilterButton = ({ onClick }) => (
   </Col>
 );
 
-const FilterBox = (props) => {
+const FilterBox = ({ FilterDialog, dataRepository }) => {
   const [showFilterDialog, setShowFiltersDialog] = useState(false);
   const [filters, setFilters] = useState({});
   const [formattedFilters, setFormattedFilters] = useState([]);
   useEffect(() => {
-    const formattedFilters = PlayerRepository.formatFilterLabels(filters);
+    const formattedFilters = dataRepository.formatFilterLabels(filters);
     setFormattedFilters(formattedFilters);
-  }, [filters]);
+  }, [filters, dataRepository]);
   function openFiltersDialog() {
     setShowFiltersDialog(true);
   }
@@ -49,14 +52,15 @@ const FilterBox = (props) => {
       setFilters(newFilters);
     };
   }
-
+  console.log(FilterDialog);
   return (
     <React.Fragment>
-      <PlayerFilterDialog
+      <FilterDialog
         show={showFilterDialog}
         handleClose={closeFiltersDialog}
         applyFilters={setFilters}
         existingFilters={filters}
+        dataRepository={dataRepository}
       />
       <Col className="filter-box">
         <Row className="applied-filters">
@@ -79,4 +83,16 @@ const FilterBox = (props) => {
   );
 };
 
-export default FilterBox;
+export const MatchFilterBox = (props) => (
+  <FilterBox
+    FilterDialog={MatchFilterDialog}
+    dataRepository={MatchRepository}
+  />
+);
+
+export const PlayerFilterBox = (props) => (
+  <FilterBox
+    FilterDialog={PlayerFilterDialog}
+    dataRepository={PlayerRepository}
+  />
+);
