@@ -1,0 +1,70 @@
+import matches from "./db/matches";
+import Paginator from "./Paginator";
+import Repository from "./Repository";
+import stats from "./teamWiseHomeAndAway";
+class MatchRepository extends Repository {
+  constructor(matches) {
+    super();
+    this.matches = matches;
+  }
+
+  getKeys() {
+    return Object.keys(this.matches[0]).filter((key) => key != "id");
+  }
+
+  getAll() {
+    return new Paginator(this.matches, 20);
+  }
+
+  formatFilterLabels(filters) {
+    return Object.keys(filters)
+      .map((key) => {
+        switch (key) {
+          case "season":
+          case "venue":
+          case "playingTeam":
+          case "tossDecision":
+          case "winnerTeam":
+          case "umpire":
+            return filters[key].length > 0
+              ? {
+                  key,
+                  label: (
+                    <span>
+                      <b>{key} : </b>
+                      {filters[key].join(", ")}
+                    </span>
+                  ),
+                }
+              : null;
+          default:
+            return null;
+        }
+      })
+      .filter((item) => item != null);
+  }
+  getFilterPoints(points) {
+    console.log(matches.length);
+    let filterPoints = {};
+    points.forEach((point) => {
+      filterPoints[point] = new Set();
+    });
+    filterPoints.umpires = new Set();
+    this.matches.forEach((match) => {
+      points.forEach((point) => {
+        if (match[point] && match[point] !== "")
+          filterPoints[point].add(match[point]);
+      });
+      filterPoints.umpires.add(match.umpire1);
+      filterPoints.umpires.add(match.umpire2);
+    });
+    filterPoints.teams = Object.keys(stats);
+
+    Object.keys(filterPoints).forEach((key) => {
+      filterPoints[key] = Array.from(filterPoints[key]);
+    });
+    return filterPoints;
+  }
+}
+
+export default new MatchRepository(matches);

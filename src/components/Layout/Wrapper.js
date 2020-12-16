@@ -16,7 +16,7 @@ const Wrapper = (props) => {
           <Col md={2} className="sidebar">
             <SideBar />
           </Col>
-          <Col className="data-div">
+          <Col className="data-div" md={10}>
             <DataContainer />
           </Col>
         </Row>

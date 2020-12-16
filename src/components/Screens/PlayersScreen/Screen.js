@@ -1,17 +1,17 @@
 import { useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import PlayerRepository from "../../../data/PlayerRepository";
 import InfiniteScrollTable from "../../../utils/Table/InfiniteScrollTable";
-import FilterBox from "../../Content/Filters/FilterBox/FilterBox";
+import { PlayerFilterBox } from "../../Content/Filters/FilterBox/FilterBox";
 import "./styles.scss";
 const PlayerScreen = (props) => {
   const playerHeaders = PlayerRepository.getKeys();
-  const PlayersPaginator = PlayerRepository.getAllPlayers();
+  const PlayersPaginator = PlayerRepository.getAll();
   const [players, setPlayers] = useState(PlayersPaginator.getNextPage());
   return (
-    <Container className="playerScreen p-3 pl-4 pr-0" fluid>
+    <Container className="playerScreen pt-3 pl-4 " fluid>
       <Row>
-        <FilterBox />
+        <PlayerFilterBox />
       </Row>
       <InfiniteScrollTable
         data={players}

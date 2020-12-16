@@ -1,0 +1,37 @@
+import { useState } from "react";
+import { Container, Row } from "react-bootstrap";
+import MatchRepository from "../../../data/MatchRepository";
+import InfiniteScrollTable from "../../../utils/Table/InfiniteScrollTable";
+import { MatchFilterBox } from "../../Content/Filters/FilterBox/FilterBox";
+import "./styles.scss";
+const MatchScreen = (props) => {
+  const matchHeaders = MatchRepository.getKeys();
+  const MatchesPaginator = MatchRepository.getAll();
+  const [matches, setMatches] = useState(MatchesPaginator.getNextPage());
+  console.log("hrer");
+  return (
+    <Container className="matchscreen  pt-3 pl-4 " fluid>
+      <Row>
+        <MatchFilterBox />
+      </Row>
+      <InfiniteScrollTable
+        data={matches}
+        keyExtractor={(match, idx) => match.id}
+        headerCols={matchHeaders}
+        renderRow={(match) =>
+          matchHeaders.map(
+            (header) => match[header] || <span class="not-available">-</span>
+          )
+        }
+        nextPage={() => {
+          const newPlayers = MatchesPaginator.getNextPage();
+          setMatches((matches) => [...matches, ...newPlayers]);
+        }}
+        hasMore={MatchesPaginator.hasMore()}
+        selectable={false}
+      />
+    </Container>
+  );
+};
+
+export default MatchScreen;

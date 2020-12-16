@@ -40,9 +40,7 @@ const routes = [
       component: () => <Avatar src="bats-man.svg" round={true} size={35} />,
       size: 28,
     },
-    component: () => {
-      return MatchScreen;
-    },
+    component: MatchScreen,
   },
 ];
 

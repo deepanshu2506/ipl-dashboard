@@ -1,7 +1,9 @@
 import Players from "./db/players";
 import Paginator from "./Paginator";
-class PlayersRepository {
+import Repository from "./Repository";
+class PlayersRepository extends Repository {
   constructor(players) {
+    super();
     this.players = players;
   }
 
@@ -9,7 +11,7 @@ class PlayersRepository {
     return Object.keys(this.players[0]);
   }
 
-  getAllPlayers() {
+  getAll() {
     return new Paginator(this.players, 20);
   }
 
