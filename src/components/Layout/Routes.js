@@ -1,25 +1,46 @@
 import { Image } from "react-bootstrap";
 import Avatar from "react-avatar";
+import PlayerScreen from "../Screens/PlayersScreen/Screen";
 
 const routes = [
   {
-    title: "home",
-    path: "/home",
+    title: "Players",
+    path: "/players",
     exact: true,
     icon: {
-      component: () => <Avatar src="/ipl-icon.svg" round={true} size={35} />,
+      component: () => (
+        <Avatar
+          src="https://www.flaticon.com/svg/static/icons/svg/1193/1193274.svg"
+          round={true}
+          size={35}
+        />
+      ),
+      size: 28,
+    },
+    component: PlayerScreen,
+  },
+  {
+    title: "TEAMS",
+    path: "/teams",
+    exact: true,
+    icon: {
+      component: () => <Avatar src="/teams-icon.png" round={true} size={35} />,
       size: 28,
     },
     component: () => {
-      return (
-        <div>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 34, 34, 34, 43, 34, 34].map(
-            (item) => (
-              <h1>home</h1>
-            )
-          )}
-        </div>
-      );
+      return <h1>home</h1>;
+    },
+  },
+  {
+    title: "matches",
+    path: "/matches",
+    exact: true,
+    icon: {
+      component: () => <Avatar src="bats-man.svg" round={true} size={35} />,
+      size: 28,
+    },
+    component: () => {
+      return <h1>home</h1>;
     },
   },
 ];

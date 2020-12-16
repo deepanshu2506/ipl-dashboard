@@ -1,0 +1,17 @@
+@import "../../App.scss";
+
+.table-container {
+  overflow-y: auto;
+  flex-grow: 1;
+  .table {
+    thead {
+      th {
+        position: sticky;
+        top: 0;
+        background-color: $primary-color-dark;
+        color: white;
+      }
+    }
+    height: 100%;
+  }
+}
