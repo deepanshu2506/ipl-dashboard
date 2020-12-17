@@ -79,9 +79,11 @@ const InfiniteScrollTable = ({
               ))}
             </tbody>
           ) : (
-            <tbody>
+            <tbody className="empty-table">
               <tr>
-                <td colSpan="100%">{renderEmpty()}</td>
+                <td className="empty" colSpan="100%">
+                  {renderEmpty()}
+                </td>
               </tr>
             </tbody>
           )}

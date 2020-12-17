@@ -22,7 +22,6 @@ const DataContainer = (props) => {
         );
       }
     }
-
     return routes;
   };
 

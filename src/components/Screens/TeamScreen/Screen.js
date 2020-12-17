@@ -39,7 +39,7 @@ const TeamsScreen = (props) => {
             `/matches?${querystring.stringify({ playingTeam: team.team })}`
           )
         }
-        renderEmpty={(props) => <p>No Teams</p>}
+        renderEmpty={(props) => <p>No Teams match your search</p>}
       />
     </Container>
   );

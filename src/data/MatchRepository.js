@@ -23,7 +23,7 @@ class MatchRepository extends Repository {
   }
 
   getAll() {
-    return new Paginator(this.matches, 20);
+    return new Paginator([], 20);
   }
 
   filter(filters) {

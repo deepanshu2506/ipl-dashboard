@@ -26,5 +26,18 @@
       }
     }
     height: 100%;
+    .empty-table {
+      height: 50px;
+      .empty {
+        vertical-align: top;
+        text-align: center;
+        background-color: white;
+        color: #888;
+        font-size: 1.2em;
+        &:hover {
+          background-color: white;
+        }
+      }
+    }
   }
 }

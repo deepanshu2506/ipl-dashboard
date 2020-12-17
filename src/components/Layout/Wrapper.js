@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Container, Col, Row } from "react-bootstrap";
 import "./Wrapper.scss";
@@ -7,7 +7,6 @@ import SideBar from "./SideBar";
 import Appbar from "./AppBar/Appbar";
 
 const Wrapper = (props) => {
-  const [menuExpanded, setMenuExpanded] = useState(false);
   return (
     <React.Fragment>
       <Appbar />

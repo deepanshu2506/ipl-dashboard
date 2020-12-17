@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Col, Container, Form, Modal, Row } from "react-bootstrap";
+import { Button, Col, Container, Modal, Row } from "react-bootstrap";
 import TeamRepository from "../../../data/TeamRepository";
 import MinMaxFilterInput from "../MinMaxFilter/MinMaxFilter";
 import "./styles.scss";

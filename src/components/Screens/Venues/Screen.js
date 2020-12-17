@@ -34,7 +34,7 @@ const VenueScreen = (props) => {
             })}`
           )
         }
-        renderEmpty={(props) => <p>No Venues</p>}
+        renderEmpty={(props) => <p>No Venues match your search</p>}
       />
     </Container>
   );

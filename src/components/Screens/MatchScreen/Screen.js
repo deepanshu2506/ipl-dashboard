@@ -36,7 +36,7 @@ const MatchScreen = (props) => {
         keyExtractor={(match, idx) => match.id}
         headerCols={matchHeaders}
         renderRow={renderRow}
-        renderEmpty={(props) => <p>No Matches Match your search</p>}
+        renderEmpty={(props) => <p>No Games match your search</p>}
       />
     </Container>
   );
