@@ -38,7 +38,7 @@ const VenueFilterDialog = ({
   return (
     <Modal size="lg" show={show} centered onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Filter Players</Modal.Title>
+        <Modal.Title>Filter Venues</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Container fluid>
