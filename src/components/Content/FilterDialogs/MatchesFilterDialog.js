@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Modal, Row } from "react-bootstrap";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
-import MatchRepository from "../../../../data/MatchRepository";
+import MatchRepository from "../../../data/MatchRepository";
+import MultiSelect from "../../MultiSelect/MultiSelect";
 import "./styles.scss";
 const initFilterState = {
   season: [],
@@ -13,29 +14,11 @@ const initFilterState = {
   umpire: [],
 };
 
-const convertOptionsToFormat = (items) =>
-  items.map((item) => ({
-    label: item,
-    value: item,
-  }));
-
 const MatchFilterPoints = MatchRepository.getFilterPoints([
   "season",
   "Venue",
   "tossDecision",
 ]);
-
-const animatedComponents = makeAnimated();
-const MultiSelect = ({ selected, options, ...props }) => (
-  <Select
-    closeMenuOnSelect={false}
-    components={animatedComponents}
-    value={convertOptionsToFormat(selected)}
-    isMulti
-    options={convertOptionsToFormat(options)}
-    {...props}
-  />
-);
 
 const MatchFilterDialog = ({
   show,
@@ -153,14 +136,10 @@ const MatchFilterDialog = ({
       </Modal.Body>
       <Modal.Footer>
         <Row>
-          <Button variant="outline-danger" onClick={clearFilters}>
+          <Button variant="danger" onClick={clearFilters}>
             CLEAR
           </Button>
-          <Button
-            className="ml-2"
-            onClick={filterData}
-            variant="outline-primary"
-          >
+          <Button className="ml-2" onClick={filterData} variant="primary">
             FILTER
           </Button>
         </Row>

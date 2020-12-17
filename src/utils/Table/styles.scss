@@ -1,4 +1,4 @@
-@import "../../App.scss";
+@import "../../colors.scss";
 
 .table-container {
   overflow-y: auto;
@@ -9,7 +9,10 @@
       th {
         position: sticky;
         top: 0;
-        background-color: $primary-color-dark;
+        font-weight: 100;
+        letter-spacing: 1px;
+        background-color: $primary-color;
+        text-transform: uppercase;
         color: white;
       }
     }

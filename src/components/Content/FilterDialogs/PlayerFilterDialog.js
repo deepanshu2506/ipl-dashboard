@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Modal, Row } from "react-bootstrap";
-import Select from "react-select";
-import makeAnimated from "react-select/animated";
-import PlayerRepository from "../../../../data/PlayerRepository";
+import PlayerRepository from "../../../data/PlayerRepository";
+import MultiSelect from "../../MultiSelect/MultiSelect";
 import "./styles.scss";
 const initFilterState = {
   dob: { from: undefined, to: undefined },
@@ -11,19 +10,11 @@ const initFilterState = {
   Country: [],
 };
 
-const convertOptionsToFormat = (items) =>
-  items.map((item) => ({
-    label: item,
-    value: item,
-  }));
-
 const PlayerFilterPoints = PlayerRepository.getFilterPoints([
   "Batting_Hand",
   "Bowling_Skill",
   "Country",
 ]);
-
-const animatedComponents = makeAnimated();
 
 const PlayerFilterDialog = ({
   show,
@@ -114,15 +105,11 @@ const PlayerFilterDialog = ({
                 <Form.Label>
                   <span className="lead">Batting Hand</span>
                 </Form.Label>
-                <Select
-                  closeMenuOnSelect={false}
-                  components={animatedComponents}
-                  value={convertOptionsToFormat(filters.Batting_Hand)}
-                  isMulti
+
+                <MultiSelect
+                  options={PlayerFilterPoints.Batting_Hand}
+                  selected={filters.Batting_Hand}
                   onChange={onFilterChange("Batting_Hand")}
-                  options={convertOptionsToFormat(
-                    PlayerFilterPoints.Batting_Hand
-                  )}
                 />
               </Form.Group>
             </Col>
@@ -131,15 +118,10 @@ const PlayerFilterDialog = ({
                 <Form.Label>
                   <span className="lead">Bowling Skill</span>
                 </Form.Label>
-                <Select
-                  closeMenuOnSelect={false}
-                  components={animatedComponents}
-                  value={convertOptionsToFormat(filters.Bowling_Skill)}
-                  isMulti
+                <MultiSelect
+                  options={PlayerFilterPoints.Bowling_Skill}
+                  selected={filters.Bowling_Skill}
                   onChange={onFilterChange("Bowling_Skill")}
-                  options={convertOptionsToFormat(
-                    PlayerFilterPoints.Bowling_Skill
-                  )}
                 />
               </Form.Group>
             </Col>
@@ -151,13 +133,10 @@ const PlayerFilterDialog = ({
                 <Form.Label>
                   <span className="lead">Country</span>
                 </Form.Label>
-                <Select
-                  closeMenuOnSelect={false}
-                  components={animatedComponents}
-                  value={convertOptionsToFormat(filters.Country)}
-                  isMulti
+                <MultiSelect
+                  options={PlayerFilterPoints.Country}
+                  selected={filters.Country}
                   onChange={onFilterChange("Country")}
-                  options={convertOptionsToFormat(PlayerFilterPoints.Country)}
                 />
               </Form.Group>
             </Col>
@@ -166,14 +145,10 @@ const PlayerFilterDialog = ({
       </Modal.Body>
       <Modal.Footer>
         <Row>
-          <Button variant="outline-danger" onClick={clearFilters}>
+          <Button variant="danger" onClick={clearFilters}>
             CLEAR
           </Button>
-          <Button
-            className="ml-2"
-            onClick={filterData}
-            variant="outline-primary"
-          >
+          <Button className="ml-2" onClick={filterData} variant="primary">
             FILTER
           </Button>
         </Row>

@@ -4,12 +4,14 @@ import "./styles.scss";
 import { BsFillCaretDownFill, BsFilter } from "react-icons/bs";
 import PropTypes from "prop-types";
 import { IoCloseOutline } from "react-icons/io5";
-import MatchRepository from "../../../../data/MatchRepository";
+import MatchRepository from "../../../data/MatchRepository";
 import MatchFilterDialog from "../FilterDialogs/MatchesFilterDialog";
 import PlayerFilterDialog from "../FilterDialogs/PlayerFilterDialog";
-import PlayerRepository from "../../../../data/PlayerRepository";
-import Repository from "../../../../data/Repository";
+import PlayerRepository from "../../../data/PlayerRepository";
+import Repository from "../../../data/Repository";
 import querystring from "querystring";
+import TeamFilterDialog from "../FilterDialogs/TeamsFilterDialog";
+import TeamRepository from "../../../data/TeamRepository";
 
 const FilterLabel = ({ label, removeFilter }) => {
   return (
@@ -47,7 +49,7 @@ const FilterBox = ({
   setFilteredData,
   ...props
 }) => {
-  const [showFilterDialog, setShowFiltersDialog] = useState(false);
+  const [showFilterDialog, setShowFiltersDialog] = useState(true);
   const [filters, setFilters] = useState(
     props.filterQuery ? querystring.parse(props.filterQuery.substring(1)) : {}
   );
@@ -56,11 +58,12 @@ const FilterBox = ({
 
   useEffect(() => {
     if (prevFilters !== undefined || Object.keys(filters).length !== 0) {
-      console.log("here");
+      console.log(filters);
       setFilteredData(dataRepository.filter(filters));
       const formattedFilters = dataRepository.formatFilterLabels(filters);
       setFormattedFilters(formattedFilters);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters]);
   function openFiltersDialog() {
     setShowFiltersDialog(true);
@@ -127,6 +130,14 @@ export const PlayerFilterBox = (props) => (
   <FilterBox
     FilterDialog={PlayerFilterDialog}
     dataRepository={PlayerRepository}
+    {...props}
+  />
+);
+
+export const TeamFilterBox = (props) => (
+  <FilterBox
+    FilterDialog={TeamFilterDialog}
+    dataRepository={TeamRepository}
     {...props}
   />
 );

@@ -20,7 +20,6 @@ const InfiniteScrollTable = ({
   const loadMore = () => {
     setData((prev) => [...prev, ...dataPaginator.getNextPage()]);
   };
-
   React.useEffect(() => {
     setData(dataPaginator.getFirstPage());
   }, [dataPaginator]);

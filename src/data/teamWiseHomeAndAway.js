@@ -1,7 +1,7 @@
 const stats = {
   "Rising Pune Supergiant": {
     team: "Rising Pune Supergiant",
-    avatar: "https://iconape.com/wp-content/png_logo_vector/vivo-ipl-logo.png",
+    avatar: "/teams/rps.png",
     home_wins: "5",
     away_wins: "5",
     home_matches: "8",
@@ -11,8 +11,7 @@ const stats = {
   },
   "Mumbai Indians": {
     team: "Mumbai Indians",
-    avatar:
-      "https://iconape.com/wp-content/png_logo_vector/ipl-mumbai-indians-logo.png",
+    avatar: "/teams/mi.png",
     home_wins: "58",
     away_wins: "51",
     home_matches: "101",
@@ -22,8 +21,7 @@ const stats = {
   },
   "Chennai Super Kings": {
     team: "Chennai Super Kings",
-    avatar:
-      "https://iconape.com/wp-content/png_logo_vector/ipl-chennai-super-kings-logo.png",
+    avatar: "/teams/csk.png",
     home_wins: "51",
     away_wins: "49",
     home_matches: "89",
@@ -33,8 +31,7 @@ const stats = {
   },
   "Delhi Capitals": {
     team: "Delhi Capitals",
-    avatar:
-      "https://www.searchpng.com/wp-content/uploads/2019/12/delhi-capitals-logo-PNG-715x715.jpg",
+    avatar: "/teams/dd-logo.svg",
     home_wins: "3",
     away_wins: "7",
     home_matches: "6",
@@ -44,8 +41,7 @@ const stats = {
   },
   "Sunrisers Hyderabad": {
     team: "Sunrisers Hyderabad",
-    avatar:
-      "https://www.clipartmax.com/png/middle/305-3059362_sunrisers-hyderabad-team-player-details-sunrisers-hyderabad-logo.png",
+    avatar: "/teams/srh.png",
     home_wins: "30",
     away_wins: "28",
     home_matches: "63",
@@ -55,8 +51,7 @@ const stats = {
   },
   "Rajasthan Royals": {
     team: "Rajasthan Royals",
-    avatar:
-      "https://iconape.com/wp-content/png_logo_vector/ipl-rajasthan-royals-logo.png",
+    avatar: "/teams/rr.png",
     home_wins: "29",
     away_wins: "46",
     home_matches: "67",
@@ -66,8 +61,7 @@ const stats = {
   },
   "Deccan Chargers": {
     team: "Deccan Chargers",
-    avatar:
-      "https://iconape.com/wp-content/png_logo_vector/ipl-deccan-chargers-logo.png",
+    avatar: "/teams/dc.svg",
     home_wins: "18",
     away_wins: "11",
     home_matches: "43",
@@ -78,8 +72,7 @@ const stats = {
   "Kings XI Punjab": {
     team: "Kings XI Punjab",
     home_wins: "38",
-    avatar:
-      "https://iconape.com/wp-content/png_logo_vector/ipl-deccan-chargers-logo.png",
+    avatar: "/teams/kxip.png",
 
     away_wins: "44",
     home_matches: "91",
@@ -89,8 +82,7 @@ const stats = {
   },
   "Royal Challengers Bangalore": {
     team: "Royal Challengers Bangalore",
-    avatar:
-      "https://iconape.com/wp-content/png_logo_vector/ipl-royal-challengers-bangalore-logo.png",
+    avatar: "/teams/rcb.png",
 
     home_wins: "35",
     away_wins: "49",
@@ -101,8 +93,7 @@ const stats = {
   },
   "Kolkata Knight Riders": {
     team: "Kolkata Knight Riders",
-    avatar:
-      "https://iconape.com/wp-content/png_logo_vector/ipl-kolkata-knight-riders-logo.png",
+    avatar: "/teams/kkr.svg",
 
     home_wins: "34",
     away_wins: "58",
@@ -113,8 +104,7 @@ const stats = {
   },
   "Delhi Daredevils": {
     team: "Delhi Daredevils",
-    avatar:
-      "https://iconape.com/wp-content/png_logo_vector/ipl-delhi-daredevils-logo.png",
+    avatar: "/teams/dd.png",
 
     home_wins: "25",
     away_wins: "42",
@@ -125,7 +115,7 @@ const stats = {
   },
   "Pune Warriors": {
     team: "Pune Warriors",
-    avatar: "https://iconape.com/wp-content/png_logo_vector/vivo-ipl-logo.png",
+    avatar: "/teams/pw.png",
 
     home_wins: "6",
     away_wins: "6",
@@ -136,7 +126,7 @@ const stats = {
   },
   "Kochi Tuskers Kerala": {
     team: "Kochi Tuskers Kerala",
-    avatar: "https://iconape.com/wp-content/png_logo_vector/vivo-ipl-logo.png",
+    avatar: "/teams/ktk.png",
 
     home_wins: "2",
     away_wins: "4",
@@ -147,7 +137,7 @@ const stats = {
   },
   "Gujarat Lions": {
     team: "Gujarat Lions",
-    avatar: "https://iconape.com/wp-content/png_logo_vector/vivo-ipl-logo.png",
+    avatar: "/teams/gl.png",
     home_wins: "1",
     away_wins: "12",
     home_matches: "14",

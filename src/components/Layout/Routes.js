@@ -1,7 +1,7 @@
-import { Image } from "react-bootstrap";
 import Avatar from "react-avatar";
 import PlayerScreen from "../Screens/PlayersScreen/Screen";
 import MatchScreen from "../Screens/MatchScreen/Screen";
+import TeamScreen from "../Screens/TeamScreen/Screen";
 
 const routes = [
   {
@@ -28,9 +28,7 @@ const routes = [
       component: () => <Avatar src="/teams-icon.png" round={true} size={35} />,
       size: 28,
     },
-    component: () => {
-      return <h1>home</h1>;
-    },
+    component: TeamScreen,
   },
   {
     title: "matches",
