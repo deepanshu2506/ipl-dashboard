@@ -1,20 +1,15 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Modal, Row } from "react-bootstrap";
-import PlayerRepository from "../../../data/PlayerRepository";
+import VenuesRepository from "../../../data/VenuesRepository";
 import MultiSelect from "../../MultiSelect/MultiSelect";
+import MinMaxFilterInput from "../MinMaxFilter/MinMaxFilter";
 import "./styles.scss";
 const initFilterState = {
-  dob: { from: undefined, to: undefined },
-  Batting_Hand: [],
-  Bowling_Skill: [],
-  Country: [],
+  matchesPlayed: { min: 0, max: undefined },
+  city: [],
 };
 
-const PlayerFilterPoints = PlayerRepository.getFilterPoints([
-  "Batting_Hand",
-  "Bowling_Skill",
-  "Country",
-]);
+const FilterPoints = VenuesRepository.getFilterPoints(["city"]);
 
 const VenueFilterDialog = ({
   show,
@@ -48,54 +43,16 @@ const VenueFilterDialog = ({
       <Modal.Body>
         <Container fluid>
           <Row>
-            <Col xs={12}>
-              <span className="lead">Date Of Birth</span>
-            </Col>
             <Col>
-              <Row>
-                <Col>
-                  <Form.Group controlId="from-dob">
-                    <Form.Label>From</Form.Label>
-                    <Form.Control
-                      type="date"
-                      value={
-                        filters.dob.from
-                          ? new Date(filters.dob.from)
-                              .toISOString()
-                              .substring(0, 10)
-                          : ""
-                      }
-                      onChange={(event) =>
-                        modifyFilters({
-                          ...filters,
-                          dob: { ...filters.dob, from: event.target.value },
-                        })
-                      }
-                    />
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group controlId="to-dob">
-                    <Form.Label>To</Form.Label>
-                    <Form.Control
-                      type="date"
-                      value={
-                        filters.dob.to
-                          ? new Date(filters.dob.to)
-                              .toISOString()
-                              .substring(0, 10)
-                          : ""
-                      }
-                      onChange={(event) =>
-                        modifyFilters({
-                          ...filters,
-                          dob: { ...filters.dob, to: event.target.value },
-                        })
-                      }
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
+              <MinMaxFilterInput
+                label="Matches Played"
+                currValues={filters.matchesPlayed}
+                range={FilterPoints.matchesPlayed}
+                stepSize={1}
+                onChange={(values) =>
+                  modifyFilters((prev) => ({ ...prev, matchesPlayed: values }))
+                }
+              />
             </Col>
           </Row>
           <hr className="mt-1 mb-3" />
@@ -103,40 +60,13 @@ const VenueFilterDialog = ({
             <Col>
               <Form.Group controlId="batting-hand">
                 <Form.Label>
-                  <span className="lead">Batting Hand</span>
+                  <span className="lead">Venue city</span>
                 </Form.Label>
 
                 <MultiSelect
-                  options={PlayerFilterPoints.Batting_Hand}
-                  selected={filters.Batting_Hand}
-                  onChange={onFilterChange("Batting_Hand")}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group controlId="bowling-skill">
-                <Form.Label>
-                  <span className="lead">Bowling Skill</span>
-                </Form.Label>
-                <MultiSelect
-                  options={PlayerFilterPoints.Bowling_Skill}
-                  selected={filters.Bowling_Skill}
-                  onChange={onFilterChange("Bowling_Skill")}
-                />
-              </Form.Group>
-            </Col>
-          </Row>
-          <hr className="mt-1 mb-3" />
-          <Row>
-            <Col>
-              <Form.Group controlId="country">
-                <Form.Label>
-                  <span className="lead">Country</span>
-                </Form.Label>
-                <MultiSelect
-                  options={PlayerFilterPoints.Country}
-                  selected={filters.Country}
-                  onChange={onFilterChange("Country")}
+                  options={FilterPoints.city}
+                  selected={filters.city}
+                  onChange={onFilterChange("city")}
                 />
               </Form.Group>
             </Col>

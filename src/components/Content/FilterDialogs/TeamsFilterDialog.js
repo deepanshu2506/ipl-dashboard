@@ -1,56 +1,8 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Modal, Row } from "react-bootstrap";
 import TeamRepository from "../../../data/TeamRepository";
+import MinMaxFilterInput from "../MinMaxFilter/MinMaxFilter";
 import "./styles.scss";
-
-const MinMaxFilterInput = ({
-  label,
-  range,
-  stepSize,
-  currValues,
-  onChange,
-}) => {
-  const onInputChange = (type) => (e) => {
-    onChange({ ...currValues, [type]: e.target.value });
-  };
-  return (
-    <Col xs={6}>
-      <Form.Group>
-        <Form.Label>
-          <span className="lead">{label}</span>
-        </Form.Label>
-        <Row>
-          <Col xs={6}>
-            <Form.Group>
-              <Form.Label>Min</Form.Label>
-              <Form.Control
-                value={currValues.min}
-                min={range.min}
-                max={range.max}
-                onChange={onInputChange("min")}
-                type="number"
-                stepSize={stepSize}
-              />
-            </Form.Group>
-          </Col>
-          <Col xs={6}>
-            <Form.Group>
-              <Form.Label>max</Form.Label>
-              <Form.Control
-                value={currValues.max}
-                min={range.min}
-                max={range.max}
-                type="number"
-                onChange={onInputChange("max")}
-                stepSize={stepSize}
-              />
-            </Form.Group>
-          </Col>
-        </Row>
-      </Form.Group>
-    </Col>
-  );
-};
 
 const filterPoints = TeamRepository.getFilterPoints();
 const initFilterState = {
@@ -91,64 +43,76 @@ const TeamFilterDialog = ({
       <Modal.Body>
         <Container fluid>
           <Row>
-            <MinMaxFilterInput
-              label="Home Wins"
-              currValues={filters.homeMatchWins}
-              range={filterPoints.homeMatchWins}
-              stepSize={1}
-              onChange={(values) =>
-                modifyFilters((prev) => ({ ...prev, homeMatchWins: values }))
-              }
-            />
-            <MinMaxFilterInput
-              label="Away Wins"
-              currValues={filters.awayMatchWins}
-              range={filterPoints.awayMatchWins}
-              stepSize={1}
-              onChange={(values) =>
-                modifyFilters((prev) => ({ ...prev, awayMatchWins: values }))
-              }
-            />
+            <Col xs={6}>
+              <MinMaxFilterInput
+                label="Home Wins"
+                currValues={filters.homeMatchWins}
+                range={filterPoints.homeMatchWins}
+                stepSize={1}
+                onChange={(values) =>
+                  modifyFilters((prev) => ({ ...prev, homeMatchWins: values }))
+                }
+              />
+            </Col>
+            <Col xs={6}>
+              <MinMaxFilterInput
+                label="Away Wins"
+                currValues={filters.awayMatchWins}
+                range={filterPoints.awayMatchWins}
+                stepSize={1}
+                onChange={(values) =>
+                  modifyFilters((prev) => ({ ...prev, awayMatchWins: values }))
+                }
+              />
+            </Col>
           </Row>
           <Row>
-            <MinMaxFilterInput
-              label="Home Matches"
-              currValues={filters.homeMatches}
-              range={filterPoints.homeMatches}
-              stepSize={1}
-              onChange={(values) =>
-                modifyFilters((prev) => ({ ...prev, homeMatches: values }))
-              }
-            />
-            <MinMaxFilterInput
-              label="Away Matches"
-              currValues={filters.awayMatches}
-              range={filterPoints.awayMatches}
-              stepSize={1}
-              onChange={(values) =>
-                modifyFilters((prev) => ({ ...prev, awayMatches: values }))
-              }
-            />
+            <Col xs={6}>
+              <MinMaxFilterInput
+                label="Home Matches"
+                currValues={filters.homeMatches}
+                range={filterPoints.homeMatches}
+                stepSize={1}
+                onChange={(values) =>
+                  modifyFilters((prev) => ({ ...prev, homeMatches: values }))
+                }
+              />
+            </Col>
+            <Col xs={6}>
+              <MinMaxFilterInput
+                label="Away Matches"
+                currValues={filters.awayMatches}
+                range={filterPoints.awayMatches}
+                stepSize={1}
+                onChange={(values) =>
+                  modifyFilters((prev) => ({ ...prev, awayMatches: values }))
+                }
+              />
+            </Col>
           </Row>
           <Row>
-            <MinMaxFilterInput
-              label="Home win %"
-              currValues={filters.homeWinPer}
-              range={filterPoints.homeWinPer}
-              stepSize={1}
-              onChange={(values) =>
-                modifyFilters((prev) => ({ ...prev, homeWinPer: values }))
-              }
-            />
-            <MinMaxFilterInput
-              label="Away win %"
-              currValues={filters.awayWinPer}
-              range={filterPoints.awayWinPer}
-              stepSize={1}
-              onChange={(values) =>
-                modifyFilters((prev) => ({ ...prev, awayWinPer: values }))
-              }
-            />
+            <Col xs={6}>
+              <MinMaxFilterInput
+                label="Home win %"
+                currValues={filters.homeWinPer}
+                range={filterPoints.homeWinPer}
+                stepSize={1}
+                onChange={(values) =>
+                  modifyFilters((prev) => ({ ...prev, homeWinPer: values }))
+                }
+              />
+            </Col>
+            <Col xs={6}>
+              <MinMaxFilterInput
+                label="Away win %"
+                currValues={filters.awayWinPer}
+                range={filterPoints.awayWinPer}
+                stepSize={1}
+                onChange={(values) =>
+                  modifyFilters((prev) => ({ ...prev, awayWinPer: values }))
+                }
+              />
+            </Col>
           </Row>
         </Container>
       </Modal.Body>
