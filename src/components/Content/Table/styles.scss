@@ -19,6 +19,10 @@
     tbody {
       tr td {
         vertical-align: middle;
+        .not-available {
+          width: 100%;
+          color: red;
+        }
       }
     }
     height: 100%;

@@ -9,7 +9,13 @@ const PlayerScreen = (props) => {
   const [PlayersPaginator, setPlayersPaginator] = useState(
     PlayerRepository.getAll()
   );
-
+  const renderRow = (player) => [
+    player.Player_Name,
+    player.DOB,
+    player.Batting_Hand,
+    player.Bowling_Skill,
+    player.Country,
+  ];
   return (
     <Container className="playerScreen pt-3 pl-4 " fluid>
       <Row>
@@ -20,14 +26,9 @@ const PlayerScreen = (props) => {
       </Row>
       <InfiniteScrollTable
         dataPaginator={PlayersPaginator}
-        keyExtractor={(player, idx) => idx}
+        keyExtractor={(_, idx) => idx}
         headerCols={playerHeaders}
-        renderRow={(player) =>
-          playerHeaders.map(
-            (header) =>
-              player[header] || <span className="not-available">-</span>
-          )
-        }
+        renderRow={renderRow}
         renderEmpty={(props) => <p>No Players</p>}
       />
     </Container>

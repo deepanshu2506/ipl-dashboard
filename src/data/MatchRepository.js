@@ -9,7 +9,17 @@ class MatchRepository extends Repository {
   }
 
   getKeys() {
-    return Object.keys(this.matches[0]).filter((key) => key !== "id");
+    return [
+      "season",
+      "venue",
+      "home team",
+      "away team",
+      "toss decision",
+      "winner",
+      "win margin",
+      "umpire 1",
+      "umpire 2",
+    ];
   }
 
   getAll() {

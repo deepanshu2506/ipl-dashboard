@@ -67,7 +67,13 @@ const InfiniteScrollTable = ({
                   }}
                 >
                   {renderRow(item).map((cell, idx) => (
-                    <td key={idx}>{cell}</td>
+                    <td key={idx}>
+                      {cell && cell !== "" ? (
+                        cell
+                      ) : (
+                        <span className="not-available">-</span>
+                      )}
+                    </td>
                   ))}
                 </tr>
               ))}
