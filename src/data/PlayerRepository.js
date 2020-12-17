@@ -8,7 +8,7 @@ class PlayersRepository extends Repository {
   }
 
   getKeys() {
-    return Object.keys(this.players[0]);
+    return ["player name", "dob", "batting hand", "bowling skill", "country"];
   }
 
   getAll() {

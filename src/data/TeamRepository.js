@@ -10,14 +10,14 @@ class TeamsRepository extends Repository {
 
   getKeys() {
     return [
-      "LOGO",
+      "",
       "TEAM",
       "HOME WINS",
       "AWAY WINS",
       "HOME MATCHES",
       "AWAY MATCHES",
-      "HOME WIN PERCENTAGE",
-      "AWAY WIN PERCENTAGE",
+      "HOME WIN %",
+      "AWAY WIN %",
     ];
   }
   getAll() {

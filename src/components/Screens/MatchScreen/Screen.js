@@ -21,7 +21,7 @@ const MatchScreen = (props) => {
     match.umpire2,
   ];
   return (
-    <Container className="matchscreen  pt-3 pl-4 " fluid>
+    <Container className="screen matchscreen  pt-3 pl-4 " fluid>
       <Row>
         <MatchFilterBox
           setFilteredData={setMatchesPaginator}

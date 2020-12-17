@@ -5,6 +5,9 @@
   flex-grow: 1;
   .table {
     background-color: white;
+    td {
+      vertical-align: middle;
+    }
     thead {
       th {
         position: sticky;
@@ -17,12 +20,9 @@
       }
     }
     tbody {
-      tr td {
-        vertical-align: middle;
-        .not-available {
-          width: 100%;
-          color: red;
-        }
+      .not-available {
+        width: 100%;
+        color: red;
       }
     }
     height: 100%;

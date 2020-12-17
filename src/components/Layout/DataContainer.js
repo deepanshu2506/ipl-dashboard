@@ -31,7 +31,12 @@ const DataContainer = (props) => {
     []
   );
 
-  return <Switch>{routes}</Switch>;
+  return (
+    <Switch>
+      {routes}
+      <Route path="/" component={() => <Redirect to="/teams" />} />
+    </Switch>
+  );
 };
 
 export default React.memo(DataContainer);

@@ -22,7 +22,7 @@ const TeamsScreen = (props) => {
   ];
 
   return (
-    <Container className="teamScreen pt-3 pl-4 " fluid>
+    <Container className="screen teamScreen pt-3 pl-4 " fluid>
       <Row>
         <TeamFilterBox setFilteredData={setTeamsPaginator} />
       </Row>

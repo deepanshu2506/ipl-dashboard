@@ -15,7 +15,7 @@ const VenueScreen = (props) => {
   const renderRow = (venue) => [venue.venue, venue.city, venue.matchesPlayed];
 
   return (
-    <Container className="teamScreen pt-3 pl-4 " fluid>
+    <Container className="screen venueScreen pt-3 pl-4 " fluid>
       <Row>
         <VenuesFilterBox setFilteredData={setVenuesPaginator} />
       </Row>

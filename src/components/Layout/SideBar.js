@@ -15,11 +15,7 @@ const SideBar = (props) => {
                 location.pathname.includes(item.path) && "clicked"
               }`}
             >
-              <Col md={2}>
-                {item.icon && (
-                  <item.icon.component size={item.icon.size || 25} />
-                )}
-              </Col>
+              <Col md={2}>{item.Icon && <item.Icon />}</Col>
 
               <Col md={8} className="title pl-4">
                 {item.title}

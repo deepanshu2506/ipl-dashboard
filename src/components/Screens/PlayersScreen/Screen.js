@@ -17,7 +17,7 @@ const PlayerScreen = (props) => {
     player.Country,
   ];
   return (
-    <Container className="playerScreen pt-3 pl-4 " fluid>
+    <Container className="screen playerScreen pt-3 pl-4 " fluid>
       <Row>
         <PlayerFilterBox setFilteredData={setPlayersPaginator} />
       </Row>
