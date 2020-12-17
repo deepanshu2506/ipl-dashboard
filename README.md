@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+# Search the IPL
+Problem Statement
+> Create a discovery page for IPL where users can search & use facet
+> filters to find different entities – players, teams, owners & venues.
+> Users should be able to filter based on any attributes related to the
+> entity. Make it as easy, intuitive and as less steps as possible for
+> the user to reach a particular entity.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Additional feature:
+1. clicking on a team leads to the matches played by that team
+2. clicking on the venue leads to the matches played at that venue
 
-## Available Scripts
+The app is hosted at : https://ipl-dashboard.netlify.app/
 
-In the project directory, you can run:
+## Page Load Time
+The Page Load time was calculated using lighthouse in the developer tools of google chrome.
+The page load time to interactive compare as follows:
+| Page|Before Optimzations|After Optimizations  |
+|--|--|--|
+| Teams Page |  1.0s  | 0.7s |
+| Players Page | 1.2s | 0.9s |
+| Venues Page | 1.3s | 0.9s |
+| Matches Page | 1.3s | 0.9s |
 
-### `yarn start`
+The Optimization techniques used were:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+ 1. introduce lazy loading of records using infinite scrolling tables
+ 2. reduce image sizes 
+ 3. reducing number of dom nodes.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+After Optimizing, [dot-com-tools.com](https://www.dotcom-tools.com/website-speed-test.aspx) gave the following results for the page load time from 21 locations around the globe:
 
-### `yarn test`
+![](screenshots/load-times.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The bundle size was found to be **373 KB**
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Screenshots
+## teams page
+![](screenshots/ss1.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## players page 
+![](screenshots/ss2.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## matches page 
+![](screenshots/ss3.png)
 
-### `yarn eject`
+## venues page
+![](screenshots/ss4.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## filters
+ ![](screenshots/ss5.png)
+ ![](screenshots/ss6.png)
+ ![](screenshots/ss7.png)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## filtered results
+ ![](screenshots/ss8.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
