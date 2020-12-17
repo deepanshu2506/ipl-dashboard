@@ -12,6 +12,8 @@ import Repository from "../../../data/Repository";
 import querystring from "querystring";
 import TeamFilterDialog from "../FilterDialogs/TeamsFilterDialog";
 import TeamRepository from "../../../data/TeamRepository";
+import VenueFilterDialog from "../FilterDialogs/VenuesFilterDialog";
+import VenuesRepository from "../../../data/VenuesRepository";
 
 const FilterLabel = ({ label, removeFilter }) => {
   return (
@@ -49,7 +51,7 @@ const FilterBox = ({
   setFilteredData,
   ...props
 }) => {
-  const [showFilterDialog, setShowFiltersDialog] = useState(true);
+  const [showFilterDialog, setShowFiltersDialog] = useState(false);
   const [filters, setFilters] = useState(
     props.filterQuery ? querystring.parse(props.filterQuery.substring(1)) : {}
   );
@@ -138,6 +140,14 @@ export const TeamFilterBox = (props) => (
   <FilterBox
     FilterDialog={TeamFilterDialog}
     dataRepository={TeamRepository}
+    {...props}
+  />
+);
+
+export const VenuesFilterBox = (props) => (
+  <FilterBox
+    FilterDialog={VenueFilterDialog}
+    dataRepository={VenuesRepository}
     {...props}
   />
 );

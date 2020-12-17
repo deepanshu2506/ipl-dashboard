@@ -1,7 +1,7 @@
 import matches from "./db/matches";
 import Paginator from "./Paginator";
 import Repository from "./Repository";
-import stats from "./teamWiseHomeAndAway";
+import stats from "./db/teamWiseHomeAndAway";
 class MatchRepository extends Repository {
   constructor(matches) {
     super();

@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Container, Image, Row } from "react-bootstrap";
+import { useHistory } from "react-router";
+import querystring from "querystring";
 import TeamRepository from "../../../data/TeamRepository";
-import InfiniteScrollTable from "../../../utils/Table/InfiniteScrollTable";
 import { TeamFilterBox } from "../../Content/FilterBox/FilterBox";
 import "./styles.scss";
-
+import InfiniteScrollTable from "../../Content/Table/InfiniteScrollTable";
 const TeamsScreen = (props) => {
+  const history = useHistory();
   const TeamHeaders = TeamRepository.getKeys();
   const [TeamsPaginator, setTeamsPaginator] = useState(TeamRepository.getAll());
   const renderRow = (team) => [
@@ -29,9 +31,14 @@ const TeamsScreen = (props) => {
       </Row>
       <InfiniteScrollTable
         dataPaginator={TeamsPaginator}
-        keyExtractor={(player, idx) => idx}
+        keyExtractor={(_, idx) => idx}
         headerCols={TeamHeaders}
         renderRow={renderRow}
+        onRowClick={(team) =>
+          history.push(
+            `/matches?${querystring.stringify({ playingTeam: team.team })}`
+          )
+        }
         renderEmpty={(props) => <p>No Teams</p>}
       />
     </Container>

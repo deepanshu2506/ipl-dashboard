@@ -1,6 +1,6 @@
 import Paginator from "./Paginator";
 import Repository from "./Repository";
-import Teams from "./teamWiseHomeAndAway";
+import Teams from "./db/teamWiseHomeAndAway";
 class TeamsRepository extends Repository {
   constructor(teams) {
     super();

@@ -2,6 +2,7 @@ import Avatar from "react-avatar";
 import PlayerScreen from "../Screens/PlayersScreen/Screen";
 import MatchScreen from "../Screens/MatchScreen/Screen";
 import TeamScreen from "../Screens/TeamScreen/Screen";
+import VenueScreen from "../Screens/Venues/Screen";
 
 const routes = [
   {
@@ -21,7 +22,7 @@ const routes = [
     component: PlayerScreen,
   },
   {
-    title: "TEAMS",
+    title: "teams",
     path: "/teams",
     exact: true,
     icon: {
@@ -38,6 +39,15 @@ const routes = [
       size: 28,
     },
     component: MatchScreen,
+  },
+  {
+    title: "venues",
+    path: "/venues",
+    icon: {
+      component: () => <Avatar src="venue-icon.svg" round={true} size={35} />,
+      size: 28,
+    },
+    component: VenueScreen,
   },
 ];
 

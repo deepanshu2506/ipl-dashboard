@@ -1,0 +1,12 @@
+@import "../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins";
+@import "../../../colors.scss";
+
+.venueScreen {
+  height: 100%;
+  overflow-y: hidden;
+  display: flex;
+  background-color: $light;
+  flex-direction: column;
+}

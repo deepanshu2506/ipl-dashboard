@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import PlayerRepository from "../../../data/PlayerRepository";
-import InfiniteScrollTable from "../../../utils/Table/InfiniteScrollTable";
 import { PlayerFilterBox } from "../../Content/FilterBox/FilterBox";
+import InfiniteScrollTable from "../../Content/Table/InfiniteScrollTable";
 import "./styles.scss";
 const PlayerScreen = (props) => {
   const playerHeaders = PlayerRepository.getKeys();

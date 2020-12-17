@@ -4,7 +4,7 @@ import { Table as TableBase } from "react-bootstrap";
 import PropTypes from "prop-types";
 import _ from "lodash";
 import "./styles.scss";
-import Paginator from "../../data/Paginator";
+import Paginator from "../../../data/Paginator";
 
 const InfiniteScrollTable = ({
   dataPaginator,
@@ -12,8 +12,6 @@ const InfiniteScrollTable = ({
   renderRow,
   renderEmpty,
   keyExtractor,
-  dataModifier,
-  selectable = true,
   ...props
 }) => {
   const [data, setData] = useState([]);
@@ -21,7 +19,7 @@ const InfiniteScrollTable = ({
     setData((prev) => [...prev, ...dataPaginator.getNextPage()]);
   };
   React.useEffect(() => {
-    setData(dataPaginator.getFirstPage());
+    setData(dataPaginator.reset().getNextPage());
   }, [dataPaginator]);
 
   React.useEffect(() => {
@@ -33,6 +31,7 @@ const InfiniteScrollTable = ({
           tableContainer.scrollTop + tableContainer.clientHeight + 1;
         const lastRowOffset = lastRow.offsetTop + lastRow.clientHeight;
         if (scrollHeight >= lastRowOffset) {
+          console.log("here");
           loadMore();
         }
       }
@@ -92,10 +91,8 @@ InfiniteScrollTable.propTypes = {
   renderRow: PropTypes.func.isRequired,
   renderEmpty: PropTypes.func.isRequired,
   keyExtractor: PropTypes.func.isRequired,
-  dataModifier: PropTypes.func,
-  selectable: PropTypes.bool,
+
   onRowClick: PropTypes.func,
-  nextPage: PropTypes.func,
 };
 
 export default InfiniteScrollTable;

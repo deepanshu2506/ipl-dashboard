@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import MatchRepository from "../../../data/MatchRepository";
-import InfiniteScrollTable from "../../../utils/Table/InfiniteScrollTable";
 import { MatchFilterBox } from "../../Content/FilterBox/FilterBox";
+import InfiniteScrollTable from "../../Content/Table/InfiniteScrollTable";
 import "./styles.scss";
 const MatchScreen = (props) => {
   const matchHeaders = MatchRepository.getKeys();
