@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Modal, Row } from "react-bootstrap";
-import Select from "react-select";
-import makeAnimated from "react-select/animated";
+
 import MatchRepository from "../../../data/MatchRepository";
 import MultiSelect from "../../MultiSelect/MultiSelect";
 import "./styles.scss";

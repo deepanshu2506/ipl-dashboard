@@ -29,7 +29,7 @@ const PlayerScreen = (props) => {
         keyExtractor={(_, idx) => idx}
         headerCols={playerHeaders}
         renderRow={renderRow}
-        renderEmpty={(props) => <p>No Players</p>}
+        renderEmpty={(props) => <p>No Players match your search</p>}
       />
     </Container>
   );
