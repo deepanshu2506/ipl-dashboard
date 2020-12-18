@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Container, Image, Row } from "react-bootstrap";
 import { useHistory } from "react-router";
-import querystring from "querystring";
 import TeamRepository from "../../../data/TeamRepository";
 import { TeamFilterBox } from "../../Content/FilterBox/FilterBox";
-import "./styles.scss";
 import InfiniteScrollTable from "../../Content/Table/InfiniteScrollTable";
+import { getPlayingTeamMatchesUrl } from "../../../utils/MatchUtils";
+import "./styles.scss";
 const TeamsScreen = (props) => {
   const history = useHistory();
   const TeamHeaders = TeamRepository.getKeys();
@@ -34,11 +34,7 @@ const TeamsScreen = (props) => {
         keyExtractor={(_, idx) => idx}
         headerCols={TeamHeaders}
         renderRow={renderRow}
-        onRowClick={(team) =>
-          history.push(
-            `/matches?${querystring.stringify({ playingTeam: team.team })}`
-          )
-        }
+        onRowClick={(team) => history.push(getPlayingTeamMatchesUrl(team.team))}
         renderEmpty={(props) => <p>No Teams match your search</p>}
       />
     </Container>

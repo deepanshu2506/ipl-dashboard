@@ -1,32 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import MatchRepository from "../../../data/MatchRepository";
+import { getPlayingTeamMatchesUrl } from "../../../utils/MatchUtils";
 import { MatchFilterBox } from "../../Content/FilterBox/FilterBox";
 import InfiniteScrollTable from "../../Content/Table/InfiniteScrollTable";
 import "./styles.scss";
+
 const MatchScreen = (props) => {
+  const history = useHistory();
+  const location = useLocation();
   const matchHeaders = MatchRepository.getKeys();
   const [MatchesPaginator, setMatchesPaginator] = useState(
     MatchRepository.getAll()
   );
   const renderRow = (match) => [
     match.season,
-    match.venue,
-    match.team1,
-    match.team2,
+    match.Venue,
+    <Link to={getPlayingTeamMatchesUrl(match.team1)}>{match.team1}</Link>,
+    <Link to={getPlayingTeamMatchesUrl(match.team2)}>{match.team2}</Link>,
     match.tossDecision,
     match.winner,
     match.winMargin,
     match.umpire1,
     match.umpire2,
   ];
+
   return (
     <Container className="screen matchscreen  pt-3 pl-4 " fluid>
       <Row>
-        <MatchFilterBox
-          setFilteredData={setMatchesPaginator}
-          filterQuery={props.location.search}
-        />
+        <MatchFilterBox setFilteredData={setMatchesPaginator} />
       </Row>
       <Row>
         <span className="row-count">{`${MatchesPaginator.length} entries`}</span>

@@ -5,6 +5,20 @@
   padding: 10px 15px 0 15px;
   border-radius: 4px;
   background-color: white;
+
+  .search {
+    input {
+      font-size: 1.2em;
+      border: 1px solid $primary-color;
+    }
+    .col-md-1 {
+      padding: 0;
+      margin-left: 5px;
+    }
+    button {
+      height: 100%;
+    }
+  }
   .applied-filters {
     padding: 0 0 10px 10px;
     .filter-label {

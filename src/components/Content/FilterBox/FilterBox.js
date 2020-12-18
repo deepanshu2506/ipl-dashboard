@@ -1,7 +1,7 @@
-import { Col, Row } from "react-bootstrap";
+import { Col, Form, Row, Button } from "react-bootstrap";
 import React, { useEffect, useRef, useState } from "react";
 import "./styles.scss";
-import { BsFillCaretDownFill, BsFilter } from "react-icons/bs";
+import { BsFillCaretDownFill, BsFilter, BsSearch } from "react-icons/bs";
 import PropTypes from "prop-types";
 import { IoCloseOutline } from "react-icons/io5";
 import MatchRepository from "../../../data/MatchRepository";
@@ -14,6 +14,7 @@ import TeamFilterDialog from "../FilterDialogs/TeamsFilterDialog";
 import TeamRepository from "../../../data/TeamRepository";
 import VenueFilterDialog from "../FilterDialogs/VenuesFilterDialog";
 import VenuesRepository from "../../../data/VenuesRepository";
+import { useLocation } from "react-router";
 
 const FilterLabel = ({ label, removeFilter }) => {
   return (
@@ -51,13 +52,16 @@ const FilterBox = ({
   setFilteredData,
   ...props
 }) => {
+  const location = useLocation();
   const [showFilterDialog, setShowFiltersDialog] = useState(false);
-  const [filters, setFilters] = useState(
-    props.filterQuery ? querystring.parse(props.filterQuery.substring(1)) : {}
-  );
+  const [filters, setFilters] = useState({});
   const [formattedFilters, setFormattedFilters] = useState([]);
   const prevFilters = usePrevious(filters);
-
+  useEffect(() => {
+    setFilters(
+      location.search ? querystring.parse(location.search.substring(1)) : {}
+    );
+  }, [location.search]);
   useEffect(() => {
     if (prevFilters !== undefined || Object.keys(filters).length !== 0) {
       console.log(filters);
@@ -92,10 +96,24 @@ const FilterBox = ({
         dataRepository={dataRepository}
       />
       <Col className="filter-box">
+        <Row className="search py-2 pl-2 pr-5">
+          <Col className="pr-0">
+            <Form.Control
+              type="text"
+              placeholder={`Search for ${props.title}`}
+            />
+          </Col>
+          <Col md={1}>
+            <Button block variant="primary">
+              <BsSearch size={20} color="white" />
+            </Button>
+          </Col>
+        </Row>
         <Row className="applied-filters">
           {formattedFilters.length > 0 ? (
             formattedFilters.map((filter) => (
               <FilterLabel
+                key={filter.key}
                 label={filter.label}
                 removeFilter={removeFilter(filter.key)}
               />
@@ -123,13 +141,14 @@ export const MatchFilterBox = (props) => (
   <FilterBox
     FilterDialog={MatchFilterDialog}
     dataRepository={MatchRepository}
-    setFilteredData={props.setFilteredData}
+    title={"Matches"}
     {...props}
   />
 );
 
 export const PlayerFilterBox = (props) => (
   <FilterBox
+    title={"Players"}
     FilterDialog={PlayerFilterDialog}
     dataRepository={PlayerRepository}
     {...props}
@@ -138,6 +157,7 @@ export const PlayerFilterBox = (props) => (
 
 export const TeamFilterBox = (props) => (
   <FilterBox
+    title={"Teams"}
     FilterDialog={TeamFilterDialog}
     dataRepository={TeamRepository}
     {...props}
@@ -146,6 +166,7 @@ export const TeamFilterBox = (props) => (
 
 export const VenuesFilterBox = (props) => (
   <FilterBox
+    title="Venues"
     FilterDialog={VenueFilterDialog}
     dataRepository={VenuesRepository}
     {...props}
