@@ -31,7 +31,6 @@ const InfiniteScrollTable = ({
           tableContainer.scrollTop + tableContainer.clientHeight + 1;
         const lastRowOffset = lastRow.offsetTop + lastRow.clientHeight;
         if (scrollHeight >= lastRowOffset) {
-          console.log("here");
           loadMore();
         }
       }

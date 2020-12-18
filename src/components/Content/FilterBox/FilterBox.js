@@ -64,7 +64,6 @@ const FilterBox = ({
   }, [location.search]);
   useEffect(() => {
     if (prevFilters !== undefined || Object.keys(filters).length !== 0) {
-      console.log(filters);
       setFilteredData(dataRepository.filter(filters));
       const formattedFilters = dataRepository.formatFilterLabels(filters);
       setFormattedFilters(formattedFilters);
