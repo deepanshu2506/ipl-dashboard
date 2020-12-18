@@ -30,7 +30,7 @@ The Optimization techniques used were:
 
 1.  introduce lazy loading of records using infinite scrolling tables
 2.  reduce image sizes
-3.  Add keys to the recurring element to avoid unecessary rerendering
+3.  Add keys to the recurring element to avoid unnecessary rerendering
 4.  reducing number of dom nodes.
 
 After Optimizing, [dot-com-tools.com](https://www.dotcom-tools.com/website-speed-test.aspx) gave the following results for the page load time from 21 locations around the globe:
