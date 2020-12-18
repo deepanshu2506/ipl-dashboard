@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Container, Row } from "react-bootstrap";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MatchRepository from "../../../data/MatchRepository";
 import { getPlayingTeamMatchesUrl } from "../../../utils/MatchUtils";
 import { MatchFilterBox } from "../../Content/FilterBox/FilterBox";
@@ -8,8 +8,6 @@ import InfiniteScrollTable from "../../Content/Table/InfiniteScrollTable";
 import "./styles.scss";
 
 const MatchScreen = (props) => {
-  const history = useHistory();
-  const location = useLocation();
   const matchHeaders = MatchRepository.getKeys();
   const [MatchesPaginator, setMatchesPaginator] = useState(
     MatchRepository.getAll()

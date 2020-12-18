@@ -8,7 +8,7 @@ const SideBar = (props) => {
   return (
     <ListGroup variant="flush" className="sidebar-container">
       {items.map((item) => (
-        <ListGroup.Item className="sidebar-item">
+        <ListGroup.Item className="sidebar-item" key={item.title}>
           <Link className="" to={item.path}>
             <Row
               className={`item ${

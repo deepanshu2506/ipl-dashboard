@@ -8,7 +8,7 @@ const DataContainer = (props) => {
     const routes = [];
 
     routes.push(
-      <Route exact={item.exact} path={item.path}>
+      <Route key={item.title} exact={item.exact} path={item.path}>
         <Component />
       </Route>
     );
@@ -16,7 +16,7 @@ const DataContainer = (props) => {
     if (item.subRoutes) {
       for (const route of item.subRoutes) {
         routes.push(
-          <Route path={item.path + route.path}>
+          <Route key={route.title} path={item.path + route.path}>
             <route.component />
           </Route>
         );
